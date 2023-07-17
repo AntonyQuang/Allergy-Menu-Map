@@ -1,0 +1,160 @@
+{% extends "header.html" %}
+
+{% block title %}
+Allergy Menu Map Search
+{% endblock %}
+
+{% block head %}
+<!-- Loading maps -->
+{{searchmap.js}}
+{% endblock %}
+
+{% block content %}
+<section id="search_page_search">
+    <div class="orange-section">
+        <div class="container pt-5">
+            <h1>Allergy Menu Search</h1>
+        </div>
+                <div class="container py-3">
+                    <div class="row">
+                        <form action="{{ url_for('public.home') }}" method="post">
+                            {{ search_form.csrf_token }}
+                            <div class="row align-items-end">
+                                <div class="col-lg pb-3">
+                                    {{ search_form.location.label(class="form-label h5") }}
+                                    {{ search_form.location(class="form-control", placeholder="Town, Zipcode, etc.") }}
+                                </div>
+                                <div class="col-lg  pb-3">
+                                    {{ search_form.search_radius.label(class="form-label h5") }}
+                                    {{ search_form.search_radius(class="form-select") }}
+                                </div>
+                                <div class="col-lg pb-3">
+                                    {{ search_form.price.label(class="form-label h5") }}
+                                    {{ search_form.price(class="form-select") }}
+                                </div>
+                                <div class="col-lg pb-3">
+                                    {{ search_form.cuisines.label(class="form-label h5") }}
+                                    <button class="form-select text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cuisines</button>
+                                    {{ search_form.cuisines(class="form-check list-unstyled dropdown-menu cuisine-col-2 px-3 py-2") }}
+                                </div>
+                                <div class="col-sm py-3">
+
+                                    {{ search_form.submit(class="btn btn-light search-btn") }}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    </div>
+    <div class="fluid-container neutral-section">
+        <div class="container py-5">
+            {{ searchmap.html }}
+        </div>
+    </div>
+</section>
+
+<section id="search_results">
+    <div class="fluid-container neutral-section">
+        <div class="container neutral-section">
+            {% if search_results %}
+                {% if search_results.total > 0 %}
+                <!-- Result cards -->
+                    <div>
+                        <h2>Search Results</h2>
+                        Showing {{ search_results.first }} - {{ search_results.last }} of {{ search_results.total }} restaurant(s)
+                    </div>
+                    <div class="row">
+                        {% for restaurant in search_results.items %}
+                            <div class="col-md-4 mt-3">
+                                <div class="card h-100">
+                                    <div class="card-header card-title">
+                                        <h5><a class="a-text" target="_blank" href="{{ restaurant.website }}">{{ restaurant.name }}</a></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div>
+                                            <i>
+                                                {% for cuisine in restaurant.cuisines %}
+                                                    {% if cuisine == restaurant.cuisines[-1] %}
+                                                        {{ cuisine }}
+                                                    {% else %}
+                                                        {{ cuisine }},
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </i>
+                                        </div>
+                                        <div><a class="a-text" target="_blank" href="{{ restaurant.maps_url }}">{{ restaurant.address }}</a></div>
+                                        <div>Phone: {{ restaurant.phone }}</div>
+                                        <div>Price: {{ restaurant.price }}</div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a class="btn btn-sm btn-secondary" target="_blank" href="{{ restaurant.menu }}">Allergy Menu</a>
+                                            </div>
+                                            {% if current_user.is_authenticated %}
+                                                <div class="col text-end">
+                                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                        {% if restaurant in current_user.favourites %}
+                                                            <a href="{{ url_for('users.unlike', restaurant_id=restaurant.id, search_parameters=search_parameters) }}" class="btn btn-sm btn-light">👎</a>
+                                                        {% else %}
+                                                            <a href="{{ url_for('users.like', restaurant_id=restaurant.id, search_parameters=search_parameters) }}" class="btn btn-sm btn-light">👍</a>
+                                                        {% endif %}
+                                                      <a href="{{ url_for('users.report', restaurant_id=restaurant.id,  search_parameters=search_parameters) }}" class="btn btn-sm btn-danger">🐞</a>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+        </div>
+                <div class="d-flex container my-4 neutral-section" >
+                    <div class="mx-auto my-4">
+                        <nav aria-label="Search-navigation" class="col-12 justify-content-center">
+                            <ul class="pagination justify-content-center:">
+                                {% if search_results.has_prev %}
+                                    <li class="page-item   ">
+                                        <a class='page-link shadow-none' href="{{ url_for('public.search', page=search_results.prev_num) }}">
+                                            Previous
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for number in search_results.iter_pages() %}
+                                    {% if search_results.page != number %}
+                                        <li class="page-item">
+                                                <a class="page-link shadow-none" href="{{ url_for('public.search', page=number) }}">
+                                                    {{ number }}
+                                                </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item active page-link" aria-current="page">{{ number }}</li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if search_results.has_next %}
+                                    <li class="page-item">
+                                        <a class='page-link shadow-none'
+                                            href="{{ url_for('public.search', page=search_results.next_num) }}">
+                                            Next
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                 {% else %}
+                    <div>
+                        <h2>Search Results</h2>
+                        <div class="pb-5">Sorry, we could not find any results</div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

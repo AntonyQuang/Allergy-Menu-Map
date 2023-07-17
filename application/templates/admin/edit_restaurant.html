@@ -1,0 +1,165 @@
+{% extends "header.html" %}
+{% block title %}
+Edit Restaurant: {{ restaurant.name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="fluid-container orange-section py-5">
+    <div class="container py-5 neutral-section">
+        <div class="row">
+                <div class="col p-4 text-center">
+                    <h2>Edit details: {{ restaurant.name }}</h2>
+                </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col">
+                <form action="{{ url_for('admin.edit_restaurant', restaurant_id=restaurant.id) }}" class="w-75 mx-auto" method="post">
+
+                    {{ restaurant_form.csrf_token }}
+
+                    <div class="form-floating mb-3">
+
+                        {{ restaurant_form.name(class="form-control", id="floatingName", value=restaurant.name) }}
+                        {{ restaurant_form.name.label(for="floatingName") }}
+
+                        {% if restaurant_form.name.errors %}
+                        {% for error in restaurant_form.name.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.latitude(class="form-control", id="floatingLatitude", value=restaurant.latitude)  }}
+                        {{ restaurant_form.latitude.label(for="floatingLatitude") }}
+
+                        {% for error in restaurant_form.latitude.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.longitude(class="form-control", id="floatingLongitude", value=restaurant.longitude)  }}
+                        {{ restaurant_form.longitude.label(for="floatingLongitude") }}
+
+                        {% for error in restaurant_form.longitude.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.status(class="form-select", id="floatingStatus", value=restaurant.status)  }}
+                        {{ restaurant_form.status.label(class="form-label") }}
+
+                        {% for error in restaurant_form.status.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.price(class="form-select", id="floatingPrice", value=restaurant.price)  }}
+                        {{ restaurant_form.price.label(class="form-label") }}
+
+                        {% for error in restaurant_form.price.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.website(class="form-control", id="floatingWebsite", value=restaurant.website)  }}
+                        {{ restaurant_form.website.label(class="form-label") }}
+
+
+                        {% for error in restaurant_form.website.errors %}
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.menu(class="form-control", id="floatingMenu", value=restaurant.menu)  }}
+                        {{ restaurant_form.menu.label(for="floatingMenu") }}
+
+                        {% for error in restaurant_form.menu.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.phone(class="form-control", id="floatingPhone", value=restaurant.phone)  }}
+                        {{ restaurant_form.phone.label(for="floatingPhone") }}
+
+                        {% for error in restaurant_form.phone.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.address(class="form-control", id="floatingAddress", value=restaurant.address)  }}
+                        {{ restaurant_form.address.label(for="floatingAddress") }}
+
+                        {% for error in restaurant_form.address.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+                        {{ restaurant_form.maps_url(class="form-control", id="floatingMapsurl", value=restaurant.maps_url)  }}
+                        {{ restaurant_form.maps_url.label(for="floatingMapsurl") }}
+
+                        {% for error in restaurant_form.maps_url.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3 form-control">
+                        {{ restaurant_form.cuisines.label(class="form-label") }}
+                        {{ restaurant_form.cuisines(class="list-unstyled px-0 cuisine-col form-check", value=restaurant.cuisines)  }}
+
+
+                        {% for error in restaurant_form.cuisines.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ restaurant_form.submit(class="btn btn-light") }}
+                        <a href="{{ url_for('admin.restaurant_database')}}" class=" mx-1 btn btn-danger">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

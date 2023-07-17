@@ -1,0 +1,85 @@
+{% extends "header.html" %}
+
+{% block title %}Update your details {% endblock %}
+
+
+{% block content %}
+
+<div class="fluid-container orange-section py-5">
+    <div class="container py-5 neutral-section ">
+        <div class="row">
+            <div class="col text-center  mb-3">
+                <h1>Update your details</h1>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col">
+                <form method="POST" action="{{ url_for('users.edit_profile', user_id=user.id) }}" class="w-75 mx-auto">
+                    {{ user_form.csrf_token }}
+
+
+
+                    <!-- First Name -->
+                    <div class="form-floating mb-3">
+                        {{ user_form.first_name(class="form-control", id="floatingFirstname", value=user.first_name) }}
+                        {{ user_form.first_name.label(for="floatingFirstname") }}
+
+                        {% if user_form.first_name.errors %}
+                            {% for error in user_form.first_name.errors %}
+                            <div class="row">
+                                <span style="color:red">{{ error }}</span>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <!-- Surname -->
+                    <div class="form-floating mb-3">
+                        {{ user_form.surname(class="form-control", id="floatingSurname", value=user.surname) }}
+                        {{ user_form.surname.label(for="floatingSurname") }}
+
+                        {% if user_form.surname.errors %}
+                            {% for error in user_form.surname.errors %}
+                            <div class="row">
+                                <span style="color:red">{{ error }}</span>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-floating mb-3">
+                        {{ user_form.email(class="form-control", id="floatingEmail", value=user.email) }}
+                        {{ user_form.email.label(for="floatingEmail") }}
+
+                        {% if user_form.email.errors %}
+                            {% for error in user_form.email.errors %}
+                            <div class="row">
+                                <span style="color:red">{{ error }}</span>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="mb-3 row">
+                        <div class="col btn-group mx-auto mb-4">
+                            <!-- Update button -->
+                            {{ user_form.update(class="btn btn-light") }}
+                            <!-- Edit Password button -->
+                            <a class="btn btn-dark" href="{{ url_for('users.change_password', user_id=user.id) }}">Change Password</a>
+                        </div>
+                        <div class="col ">
+                            <!-- Cancel button -->
+                            <a class="btn btn-danger " href="{{ url_for('users.user_profile', user_id=user.id) }}">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

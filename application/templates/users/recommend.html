@@ -1,0 +1,71 @@
+{% extends "header.html" %}
+
+{% block title %} Submit a restaurant {% endblock %}
+
+{% block content %}
+
+<div class="fluid-container orange-section py-5 w-100">
+<div class="container-lg mx-auto mt-4 mb-5 neutral-section">
+    <div class="row p-4 ">
+            <div class="col text-center">
+                <h1>Found a restaurant with an allergy menu?</h1>
+                <h2>Let us know!</h2>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <form action="{{ url_for('users.recommend') }}" class="px-2 pb-4" method="post">
+
+                {{ recommend_form.csrf_token }}
+
+                <div class=" mb-3">
+                    {{ recommend_form.url.label(class="form-label") }}
+                    {{ recommend_form.url(class="form-control", placeholder=" e.g. 'https://goo.gl/maps/KhAcc39kgwisohee9'") }}
+
+
+                    {% if recommend_form.url.errors %}
+                    {% for error in recommend_form.url.errors %}
+                    <div class="row">
+                        <span style="color:red">{{ error }}</span>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+
+
+                <div class=" mb-3">
+                    {{ recommend_form.menu.label(class="form-label") }}
+                    {{ recommend_form.menu(class="form-control")  }}
+
+
+                    {% for error in recommend_form.menu.errors %}
+                    <div class="row">
+                        <span style="color:red">{{ error }}</span>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="mb-3 form-control">
+                    {{ recommend_form.cuisines.label(class="form-label") }}
+                    {{ recommend_form.cuisines(class="list-unstyled px-0 cuisine-col form-check", row="3", placeholder="")  }}
+
+                    {% for error in recommend_form.cuisines.errors %}
+                    <div class="row">
+                        <span style="color:red">{{ error }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ recommend_form.submit(class="btn btn-light recommend-btn w-100") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

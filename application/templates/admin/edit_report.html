@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+
+{% block title %}Edit {{report.parent_restaurant.name}}'s report details {% endblock %}
+
+
+{% block content %}
+
+<div class="fluid-container orange-section py-5 w-100">
+    <div class="container-lg mx-auto border m-5 neutral-section ">
+    <div class="row">
+        <div class="col text-center py-5 text-center ">
+            <h1>Edit {{ report.parent_restaurant.name }}'s report details</h1>
+        </div>
+    </div>
+    <div class="row mx-auto">
+        <div class="col">
+            <form method="POST" action="{{ url_for('admin.edit_report', report_id=report.id) }}" class="w-75 mx-auto">
+                {{ report_form.csrf_token }}
+
+                <!-- description -->
+                <div class="form-floating mb-3">
+                    {{ report_form.description(class="form-control", id="floatingDescription", value=report.description) }}
+                    {{ report_form.description.label(for="floatingDescription") }}
+                    
+                    {% if report_form.description.errors %}
+                        {% for error in report_form.description.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Status -->
+                <div class="form-floating mb-3">
+                    {{ report_form.status(class="form-select", id="floatingStatus", value=report.status)  }}
+                    {{ report_form.status.label(for="floatingStatus") }}
+
+                    {% for error in report.status.errors %}
+                    <div class="row">
+                        <span style="color:red">{{ error }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Buttons -->
+                <div class="mb-5 row">
+                    <!-- Update button -->
+                    <div class="col">
+                     {{ report_form.update(class="btn btn-light") }}
+                        <a class="btn btn-danger mx-1" href="{{ url_for('admin.report_database') }}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

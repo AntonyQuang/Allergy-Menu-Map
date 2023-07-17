@@ -1,0 +1,401 @@
+html {
+    min-height: 100%;
+    min-width: 100%;
+    overflow-y: scroll;
+    }
+
+body {
+    background-color: #d14338;
+    scroll-behavior: smooth;
+    min-height: 100%;
+}
+
+.modal-open[style] {
+padding-right: 0px !important;
+}
+
+.section {
+    border-radius: 10px;
+}
+
+.a-text {
+    color: #E1EDE2;
+}
+
+
+.a-text:link {
+    text-decoration: none;
+    color: #54808A;
+    transition: 0.3s;
+ }
+
+
+.a-text:visited {
+    text-decoration: none;
+    color: #54808A;
+    }
+
+.a-text:hover {
+    text-decoration: none;
+    color: #609FAD;
+    }
+
+.a-text:active {
+    text-decoration: none;
+    color: #609FAD;
+    }
+
+
+.cuisine-col {
+    column-count: 3;
+}
+
+@media screen and (max-width: 500px) {
+.cuisine-col {
+    column-count: 2;
+}
+}
+
+.cuisine-col-2 {
+    column-count: 2;
+}
+
+
+.gm-style-iw {
+    width: 200px;
+}
+
+.red-section {
+    background: #d14338;
+}
+
+.orange-section {
+    background: #E0B477;
+    color: #e4f5f0;
+}
+
+
+.neutral-section {
+    color:   #57180f;
+    background: #f5e7ce;
+    }
+
+.red-gradient  {
+background: rgb(209,67,56);
+background: -moz-linear-gradient(180deg, rgba(209,67,56,1) 0%, rgba(214,110,102,1) 100%);
+background: -webkit-linear-gradient(180deg, rgba(209,67,56,1) 0%, rgba(214,110,102,1) 100%);
+background: linear-gradient(180deg, rgba(209,67,56,1) 0%, rgba(214,110,102,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d14338",endColorstr="#d66e66",GradientType=1);
+}
+
+.flashes {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+
+.rounded {
+    border-radius: 30px;
+}
+
+/***************** Home page *******************/
+
+#introduction {
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+
+.home-bg-image {
+   background-image: linear-gradient(0deg,
+              rgba(124,55,48,0.35),
+              rgba(99,92,81,0.70)),
+              url('/static/images/home_splash.jpg');
+   background-size: cover;
+   background-position-x: center;
+   background-position-y: center;
+}
+
+#home_search {
+    color: #e4f5f0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+
+    background: #E0B477;
+    background: -moz-linear-gradient(180deg, rgba(224,180,119,1) 0%, rgba(232,193,139,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(224,180,119,1) 0%, rgba(232,193,139,1) 100%);
+    background: linear-gradient(180deg, rgba(224,180,119,1) 0%, rgba(232,193,139,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e0b477",endColorstr="#e8c18b",GradientType=1);
+}
+
+
+#home_search .form-label {
+    color: #e4f5f0;
+}
+
+#home_search .btn {
+    border-radius: 40px;
+}
+
+#home_search .form-control {
+    border-radius: 40px;
+}
+
+#home_search .form-select {
+    border-radius: 40px;
+}
+
+#home_search .form-check {
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+#home_map {
+    color:   #57180f;
+    background: #f5e7ce;
+    padding-bottom: 50px;
+}
+
+#footer {
+    text-decoration: none;
+    color:  #fae3dc;
+    background: #d14338;
+    padding-bottom: 100px;
+}
+
+.fa-brands {
+    text-decoration: none;
+    color:  #fae3dc;
+    transition: 0.3s;
+}
+
+.fa-brands:hover {
+    text-decoration: none;
+    color: #823f2b;
+
+}
+
+
+.fa-github {
+    margin-left: 30px;
+}
+
+#home_search .search-btn{
+width: 100%;
+}
+
+
+.intro-text {
+   color: #fae3dc;
+   text-decoration: none;
+
+}
+
+
+.intro-text.link {
+    text-decoration: none;
+}
+
+
+.fadein {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+
+.title-btn{
+    font-weight: bold;
+    transition-duration: 200ms;
+    margin-top: 120px;
+    border: none;
+}
+
+.title-btn:hover{
+    color:   #e69f6c;
+    border: none;
+}
+
+.logo {
+  transition: transform .4s ease-in-out;
+}
+.logo:hover {
+  transform: rotate(34deg);
+}
+
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+     }
+}
+
+
+/* Title button animation */
+
+.hover-down {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+}
+
+.btn:hover .hover-down {
+    animation-name: bounce;
+    animation-timing-function: ease;
+    border: none;
+}
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(50%); }
+  100% { transform: translateY(0); }
+}
+
+
+.fadeinslow {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+
+/************* Login Page *******************/
+
+#login-page{
+    box-radius: 10px;
+}
+
+#login-form-half .btn {
+    border-radius: 40px;
+}
+
+/*************** Search Map ******************/
+
+#search_map {
+    color:   #57180f;
+    background: #f5e7ce;
+    padding-bottom: 50px;
+}
+
+#search_page_search .search-btn{
+width: 100%;
+}
+
+
+#search_page_search .form-label {
+    color: #e4f5f0;
+}
+
+#search_page_search .btn {
+    border-radius: 40px;
+}
+
+#search_page_search .form-control {
+    border-radius: 40px;
+}
+
+
+#search_page_search .form-select {
+    border-radius: 40px;
+}
+
+#search_page_search .form-check {
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+#search_results .page-link {
+    color:  #823f2b;
+}
+
+#search_results .active {
+    background: #d14338;
+    color: #f5e7ce;
+    border-color:  #823f2b;
+}
+
+
+/************ Recommend ***************/
+
+.recommend-btn {
+    border-radius: 30px;
+}
+
+
+
+/***************** Data Table *******************/
+
+#restaurant-table_previous a{
+ color: brown;
+}
+
+#restaurant-table_next a{
+ color: brown;
+}
+
+.pagination {
+    --bs-pagination-color: brown;
+    --bs-pagination-active-bg: #d14338;
+    --bs-pagination-active-border-color: #d14338;
+
+}
+
+.modal-header.red-section{
+    color: white;
+}
+
+.dataTables_length {
+    margin-bottom: 10px;
+}
+
+/************** Nav bar *****************/
+
+.dropdown-item{
+    color: #fae3dc;
+    }
+
+.dropdown-item:hover {
+    color: #fae3dc;
+    background-color: #823f2b;
+}
+
+.navbar-brand {
+    color: #fae3dc;
+    transition: 0.3s;
+    }
+
+
+.nav-link a:hover {
+    color: blue;
+}
+
+.navbar-nav{
+    color: #fae3dc;
+    }
+
+.navbar: hover{
+    color: #d4e0d3;
+    }
+
+.nav-link {
+    color: #fae3dc;
+}
+
+.navbar-toggler {
+    color: #fae3dc;
+}

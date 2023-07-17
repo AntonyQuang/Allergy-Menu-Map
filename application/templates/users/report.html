@@ -1,0 +1,72 @@
+{% extends "header.html" %}
+
+{% block title %} Report a restaurant {% endblock %}
+
+{% block content %}
+
+<div class="fluid-container orange-section py-5 w-100">
+    <div class="container-lg mx-auto border m-5 neutral-section ">
+        <div class="row">
+                <div class="col py-5 text-center">
+                    <h1>Found an issue with {{ restaurant.name }}?</h1>
+                </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col ">
+                {% if search_parameters %}
+                <form action="{{ url_for('users.report', restaurant_id=restaurant.id, search_parameters=search_parameters) }}" class="w-75 mx-auto" method="post">
+
+                    {{ report_form.csrf_token }}
+
+                    <div class=" mb-3">
+                        {{ report_form.description.label(class="form-label") }}
+                        {{ report_form.description(class="form-control", rows='5') }}
+
+                        {% if report_form.description.errors %}
+                        {% for error in report_form.description.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="mb-5">
+                        {{ report_form.submit(class="btn btn-light report-btn") }}
+                    </div>
+                </form>
+                {% else %}
+                <form action="{{ url_for('users.report', restaurant_id=restaurant.id) }}" class="w-75 mx-auto" method="post">
+
+                    {{ report_form.csrf_token }}
+
+                    <div class=" mb-3">
+                        {{ report_form.description.label(class="form-label") }}
+                        {{ report_form.description(class="form-control", rows='5') }}
+
+                        {% if report_form.description.errors %}
+                        {% for error in report_form.description.errors %}
+                        <div class="row">
+                            <span style="color:red">{{ error }}</span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col">
+                            {{ report_form.submit(class="btn btn-light") }}
+                            <a class="btn btn-danger mx-1 rounded" href="{{ url_for('public.home') }}">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

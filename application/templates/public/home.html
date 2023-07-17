@@ -1,0 +1,94 @@
+{% extends "header.html" %}
+
+{% block title %}
+Allergy Menu Map
+{% endblock %}
+
+{% block head %}
+<!-- Loading maps -->
+{{mymap.js}}
+{% endblock %}
+
+{% block content %}
+{% set active_page = 'home' %}
+    <!-- Introduction section -->
+    <section id="introduction" class="red-gradient home-bg-image">
+        <div class="">
+            <div class="container intro-text">
+                <div class="row ">
+                    <div class="col text-center">
+                        <h5>Have allergies? Not sure where you can eat?</h5>
+                        <h1 class="display-1">The Allergy Menu Map</h1>
+
+                    </div>
+                </div>
+                <div class="row flex-grow-0">
+                    <div class="mx-auto text-center fadeinslow">
+                        <button class="btn title-btn intro-text" href="#home_search">
+                            <a class="title-btn intro-text" href="#home_search">
+                            Let's find some allergy menus
+                            <div class="hover-down">
+                                <i class="fa-solid fa-2xl fa-caret-down" ></i>
+                            </div>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="home_search">
+        <div class="">
+            <div class="container py-3">
+                    <div class="row">
+                        <img src="static/images/logo.svg" height="150">
+                    </div>
+
+                <div class="row text-center pb-4">
+                    <h2>Find allergy menus, fast</h2>
+                </div>
+                <div class="row">
+                    <form action="{{ url_for('public.home') }}" method="post">
+                        {{ search_form.csrf_token }}
+                        <div class="row align-items-end">
+                            <div class="col-lg pb-3">
+                                {{ search_form.location.label(class="form-label h5") }}
+                                {{ search_form.location(class="form-control", placeholder="Town, Zipcode, etc.") }}
+                            </div>
+                            <div class="col-lg  pb-3">
+                                {{ search_form.search_radius.label(class="form-label h5") }}
+                                {{ search_form.search_radius(class="form-select") }}
+                            </div>
+                            <div class="col-lg pb-3">
+                                {{ search_form.price.label(class="form-label h5") }}
+                                {{ search_form.price(class="form-select") }}
+                            </div>
+                            <div class="col-lg pb-3">
+                                {{ search_form.cuisines.label(class="form-label h5") }}
+                                <button class="form-select text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">Cuisines</button>
+                                {{ search_form.cuisines(class="form-check list-unstyled dropdown-menu cuisine-col-2 px-3 py-2") }}
+                            </div>
+                            <div class="col-sm py-3">
+
+                                {{ search_form.submit(class="btn btn-light search-btn") }}
+                            </div>
+
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </section>
+    <section id="home_map">
+        <div class="py-5 container">
+        <h2 class="text-center">Here are some restaurants with allergy menus near you</h2>
+        </div>
+        <div class="pb-3 container">
+            {{mymap.html}}
+        </div>
+    </section>
+
+
+
+{% endblock %}

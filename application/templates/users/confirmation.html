@@ -1,0 +1,38 @@
+{% extends "header.html" %}
+
+{% block title %}
+Allergy Menu Map - Recommendation
+{% endblock %}
+
+{% block head %}
+<!-- Loading maps -->
+{{confirmation_map.js}}
+{% endblock %}
+
+{% block content %}
+<div class="fluid-container p-5 orange-section w-100">
+    <div class="container neutral-section p-5">
+        <div class="row text-center p-3">
+            <h1>Thank you for submitting a restaurant</h1>
+        </div>
+        <div class="row p-3">
+            {{confirmation_map.html}}
+        </div>
+        <div class="row pt-4">
+            <dl>
+                <dt>Name</dt><dd>{{ results.name }}</dd>
+                <dt>Menu</dt><dd><a class="text-wrap a-text" href="{{ results.menu }}" target=_blank">Click here</a></dd>
+                <dt>Address</dt><dd>{{ results.address }}</dd>
+                <dt>Phone number</dt><dd>{{ results.phone}}</dd>
+                <dt>Website</dt><dd><a class="text-wrap a-text" href="{{ results.website }}" target=_blank">Click here</a></dd>
+                <dt>Price</dt><dd>{{ results.price }}</dd>
+                <dt>Cuisines</dt><dd>{% for cuisine in results.cuisines %} {{ cuisine }} {% endfor %}</dd>
+            </dl>
+        </div>
+        <div class="row ">
+            <p>Something odd about these details? <span><a class="a-text" href="{{ url_for('users.report', restaurant_id=restaurant_id) }}">Report it here</a></span></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
