@@ -38,13 +38,19 @@ def login():
 
 @bp.route("/register", methods=["GET", "POST"])
 def register():
-    # Setting up the register form, so it is ready to be rendered into the html page
     register_form = RegistrationForm()
     if register_form.validate_on_submit():
-
+        username_check = User.query.filter_by(username=register_form.username.data.lower()).first()
+        if username_check:
+            flash("Username has already been taken", category="warning")
+            return redirect(url_for("login_functionality.register"))
+        email_check = User.query.filter_by(email=register_form.email.data.lower()).first()
+        if email_check:
+            flash("Email is already associated with another account", category="warning")
+            return redirect(url_for("login_functionality.register"))
         hash_password = bcrypt.generate_password_hash(register_form.password.data)
 
-        user = User(username=register_form.username.data,
+        user = User(username=register_form.username.data.lower(),
                     first_name=register_form.first_name.data.title(),
                     surname=register_form.surname.data.title(),
                     email=register_form.email.data.lower(),
