@@ -6,11 +6,11 @@ import math
 
 
 def get_name_and_coordinates(url):
-    if url[0:20] != "https://goo.gl/maps/":
+    if url[0:24] != "https://maps.app.goo.gl/":
         return False
     response = requests.get(url, headers={'User-Agent': 'Google Chrome'})
     destination_url = response.history[-1].url
-
+    print(f"Destination url is: {destination_url}")
     # destination_url will come in the form:
     # https://www.google.com/maps/place/McDonald's/@51.4196017,-0.2064303,16.5z/data=....
     destination_url_list = destination_url.split("/")
@@ -22,10 +22,13 @@ def get_name_and_coordinates(url):
     name_and_coordinates["name"] = destination_url_list[5]
     name_and_coordinates["latitude"] = lat_lon[0]
     name_and_coordinates["longitude"] = lat_lon[1]
+    print(f"Output is {name_and_coordinates}")
     return name_and_coordinates
 
 
 def place_id_finder(name_and_coordinates):
+    if not name_and_coordinates:
+        return False
     endpoint = "https://maps.googleapis.com/maps/api/place/textsearch/json"
     # print(name_and_coordinates)
     query_name = name_and_coordinates["name"].replace("+", "%20")
