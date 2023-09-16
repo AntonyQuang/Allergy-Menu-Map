@@ -18,6 +18,9 @@ def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data.lower()).first()
+        if not user:
+            flash("Log in details are incorrect", category="danger")
+            return redirect(url_for("login_functionality.login"))
         if user.user_type == "Banned":
             flash("I'm sorry, but you have been banned from being a member this website", category="danger")
             return redirect(url_for("public.home"))
