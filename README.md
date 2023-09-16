@@ -87,7 +87,17 @@ $ source env/bin/activate`
 
 Ensure that the Flask-Googlemaps package in installed from [this github link](https://github.com/flask-extensions/Flask-GoogleMaps/releases/tag/0.4.1.1)
 
-4. Set up the database:
+If you wish to do this separately you can do so with
+
+```$pip install https://github.com/flask-extensions/Flask-GoogleMaps/archive/refs/tags/0.4.1.1.tar.gz```
+
+4. Set up your individual .env file which contains:
+ - Your Google API Key
+ - Your Flask Secret Key
+ - Your SQL Alchemy database uri
+ - Your ipinfo token
+
+5. Set up the database:
 
 ```
 $ export FLASK_APP=run.py
@@ -95,7 +105,7 @@ $ flask db init
 $ flask db migrate
 $ flask db upgrade`
 ```
-5. Run the application:
+6. Run the application:
 
 `  $ flask run`
 
