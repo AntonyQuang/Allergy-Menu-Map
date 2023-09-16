@@ -3,13 +3,16 @@ from config import Config
 import json
 from flask import request
 import math
+import urllib.request
 
 
 def get_name_and_coordinates(url):
-    if url[0:24] != "https://maps.app.goo.gl/":
+    response = urllib.request.urlopen(url)
+    destination_url = response.geturl()
+    print(f"Destination url is: {destination_url}")
+    if destination_url[0:27] != "https://www.google.com/maps":
         return False
-    response = requests.get(url, headers={'User-Agent': 'Google Chrome'})
-    destination_url = response.history[-1].url
+
     print(f"Destination url is: {destination_url}")
     # destination_url will come in the form:
     # https://www.google.com/maps/place/McDonald's/@51.4196017,-0.2064303,16.5z/data=....
