@@ -3,7 +3,7 @@ Flask app to help users find restaurants with online allergy menus near them
 
 # Repository Description:
 
-![Allergy Menu Map](https://pasteboard.co/DJ8K5vJroktW.png)
+![Allergy Menu Map](application/static/images/allergy_menu_map.png)
 
 This is a Python-based web application that helps users find restaurants that have an online allergy menu, powered by Flask. The app utilizes Google Maps API to identify restaurant locations and manages the information in an SQL lite database. Users can use the search function to look for restaurants in specific locations, price points and cuisines, with results being returned on a Google Map frame. Users are able to register an account and log in. Registed users are also able to submit restaurants with allergy menus, choose which restaurants to add to their favourites, and report restaurants with incorrect information. Admins have access to the entire database of users, restaurants, and reports, freely adding and editing the database.
 
