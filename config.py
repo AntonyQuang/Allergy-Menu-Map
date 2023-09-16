@@ -2,12 +2,9 @@ from dotenv import load_dotenv
 import os
 
 parent_folder = os.path.dirname(os.getcwd())
-print(parent_folder)
-print(os.path.join(parent_folder, '.env'))
 load_dotenv(os.path.join(parent_folder, '.env'))
 load_dotenv('.env')
 flask_secret_key = os.getenv("flask_secret_key")
-print(flask_secret_key)
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 sqlalchemy_database_uri = os.getenv("sqlalchemy_database_uri")
 ipinfo_token = os.getenv("ipinfo_token")
