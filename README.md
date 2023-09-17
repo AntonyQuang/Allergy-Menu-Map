@@ -52,9 +52,13 @@ The project consists of the following directories and files:
 │   ├── extensions.py
 │   ├── models.py
 ├── instance/
-│   └── test_app.py
+│   └── app.db
 ├── migrations/
-│   └── test_app.py
+│   ├── versions/
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── README
+│   └── script.py.mako   
 ├── config.py
 ├── requirements.txt
 └── run.py
