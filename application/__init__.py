@@ -27,7 +27,6 @@ def create_app(config_class=Config):
     from application.login_functionality import bp as login_functionality_bp
     from application.public import bp as public_bp
     from application.users import bp as user_bp
-    from application.api import bp as api_bp
 
     app.register_blueprint(admin_bp)
     app.register_blueprint(login_functionality_bp)
