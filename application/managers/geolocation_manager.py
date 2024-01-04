@@ -10,7 +10,7 @@ def get_name_and_coordinates(url):
     response = urllib.request.urlopen(url)
     destination_url = response.geturl()
     print(f"Destination url is: {destination_url}")
-    if destination_url[0:27] != "https://www.google.com/maps":
+    if destination_url[0:18] != "https://www.google":
         return False
 
     print(f"Destination url is: {destination_url}")
@@ -33,9 +33,9 @@ def place_id_finder(name_and_coordinates):
     if not name_and_coordinates:
         return False
     endpoint = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-    # print(name_and_coordinates)
+    print(name_and_coordinates)
     query_name = name_and_coordinates["name"].replace("+", "%20")
-    # print(query_name)
+    print(f"query name: {query_name}")
     payload = {
         "query": query_name,
         "location": f"{name_and_coordinates['latitude']}%2C{name_and_coordinates['longitude']}",
