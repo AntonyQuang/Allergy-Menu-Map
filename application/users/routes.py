@@ -14,7 +14,7 @@ import json
 @login_required
 def recommend():
     recommend_form = UserRecommendForm()
-    print(recommend_form)
+    print(recommend_form.url.data)
     if recommend_form.validate_on_submit():
         recommendation = {}
         recommendation["url"] = recommend_form.url.data
@@ -32,7 +32,9 @@ def add_recommendation():
     url = (session["recommendation"]["url"])
     print(url)
     name_and_coordinates = get_name_and_coordinates(url)
+    print(f"name and coordinates: {name_and_coordinates}")
     place_id = place_id_finder(name_and_coordinates)
+    print(f"place id: {place_id}")
     if name_and_coordinates and place_id:
         restaurant_information = restaurant_information_finder(place_id)
 
